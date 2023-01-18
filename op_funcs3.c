@@ -119,27 +119,30 @@ void op_rotl(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack, *prev;
 
-	for (; temp->next; temp = temp->next)
-		;
-
-	if (temp->prev == *stack)
+	if (*stack && (*stack)->next)
 	{
-		prev = *stack;
-		prev->prev = temp;
-		prev->next = NULL;
-		temp->prev = NULL;
-		temp->next = prev;
-		*stack = temp;
-	}
-	else
-	{
-		prev = temp->prev;
-		prev->next = NULL;
+		for (; temp->next; temp = temp->next)
+			;
 
-		temp->next = (*stack)->next;
-		temp->prev = NULL;
-		(*stack)->prev = temp;
-		*stack = temp;
+		if (temp->prev == *stack)
+		{
+			prev = *stack;
+			prev->prev = temp;
+			prev->next = NULL;
+			temp->prev = NULL;
+			temp->next = prev;
+			*stack = temp;
+		}
+		else
+		{
+			prev = temp->prev;
+			prev->next = NULL;
+
+			temp->next = (*stack)->next;
+			temp->prev = NULL;
+			(*stack)->prev = temp;
+			*stack = temp;
+		}
 	}
 
 	(void)lnum;
@@ -157,16 +160,19 @@ void op_rotr(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack, *prev;
 
-	prev = temp;
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
+	if (*stack && (*stack)->next)
+	{
+		prev = temp;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
 
-	for (temp = *stack; temp->next; temp = temp->next)
-		;
+		for (temp = *stack; temp->next; temp = temp->next)
+			;
 
-	prev->prev = temp;
-	prev->next = NULL;
-	temp->next = prev;
+		prev->prev = temp;
+		prev->next = NULL;
+		temp->next = prev;
+	}
 
 	(void)lnum;
 }
