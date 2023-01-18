@@ -10,7 +10,7 @@
 void op_push(stack_t **stack, unsigned int lnum)
 {
 	stack_t *new, *temp = *stack;
-	int num;
+	int num, i, start = 0;
 
 	if (!s.number)
 	{
@@ -18,18 +18,18 @@ void op_push(stack_t **stack, unsigned int lnum)
 		fprintf(stderr, "L%d: usage: push integer\n", lnum);
 		exit(EXIT_FAILURE);
 	}
-	if (strcmp(s.number, "0") == 0)
-		num = 0;
-	else
+	if (s.number[start] == '-' || s.number[start] == '+')
+		start++;
+	for (i = start; s.number[i]; i++)
 	{
-		num = atoi(s.number);
-		if (num == 0)
+		if (s.number[i] < '0' || s.number[i] > '9')
 		{
 			free_global();
 			fprintf(stderr, "L%d: usage: push integer\n", lnum);
 			exit(EXIT_FAILURE);
 		}
 	}
+	num = atoi(s.number);
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -117,6 +117,7 @@ void op_pop(stack_t **stack, unsigned int lnum)
 	if (!temp->next)
 	{
 		*stack = NULL;
+		free(temp);
 		return;
 	}
 
