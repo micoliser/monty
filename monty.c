@@ -85,8 +85,8 @@ void read_file(char *path, stack_t *stack)
 		if (!r)
 			break;
 
-		command = strtok(s.buf, " \n");
-		value = strtok(NULL, " \n");
+		command = strtok(s.buf, " \t\n");
+		value = strtok(NULL, " \t\n");
 		if (command)
 		{
 			op_func = get_op_func(command, line);

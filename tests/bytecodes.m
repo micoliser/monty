@@ -4,5 +4,7 @@ push 2
      push 5
 push 10
 push +3
-pall
 
+		pall
+                                                   push        -3
+          pall
