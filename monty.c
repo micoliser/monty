@@ -15,7 +15,8 @@ void (*get_op_func(char *opcode, unsigned int line))(stack_t **, unsigned int)
 		{"push", op_push}, {"pall", op_pall}, {"mul", op_mul},
 		{"pint", op_pint}, {"pop", op_pop}, {"div", op_div},
 		{"swap", op_swap}, {"add", op_add}, {"mod", op_mod},
-		{"nop", op_nop}, {"sub", op_sub},
+		{"nop", op_nop}, {"sub", op_sub}, {"pchar", op_pchar},
+		{"pstr", op_pstr},
 		{NULL, NULL}
 	};
 	int i, cmp;
@@ -87,7 +88,7 @@ void read_file(char *path, stack_t *stack)
 
 		command = strtok(s.buf, " \t\n");
 		value = strtok(NULL, " \t\n");
-		if (command)
+		if (command && command[0] != '#')
 		{
 			op_func = get_op_func(command, line);
 			s.number = value;
@@ -95,7 +96,6 @@ void read_file(char *path, stack_t *stack)
 		}
 		free(s.buf);
 	}
-
 	free_global();
 }
 
