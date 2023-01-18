@@ -16,7 +16,7 @@ void (*get_op_func(char *opcode, unsigned int line))(stack_t **, unsigned int)
 		{"pint", op_pint}, {"pop", op_pop}, {"div", op_div},
 		{"swap", op_swap}, {"add", op_add}, {"mod", op_mod},
 		{"nop", op_nop}, {"sub", op_sub}, {"pchar", op_pchar},
-		{"pstr", op_pstr},
+		{"pstr", op_pstr}, {"rotl", op_rotl}, {"rotr", op_rotr},
 		{NULL, NULL}
 	};
 	int i, cmp;

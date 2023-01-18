@@ -70,6 +70,8 @@ void op_pint(stack_t **, unsigned int);
 void op_swap(stack_t **, unsigned int);
 void op_pchar(stack_t **, unsigned int);
 void op_pstr(stack_t **, unsigned int);
+void op_rotl(stack_t **, unsigned int);
+void op_rotr(stack_t **, unsigned int);
 void op_add(stack_t **, unsigned int);
 void op_sub(stack_t **, unsigned int);
 void op_mul(stack_t **, unsigned int);

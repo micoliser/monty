@@ -105,3 +105,69 @@ void op_pstr(stack_t **stack, unsigned int lnum)
 
 	(void)lnum;
 }
+
+/**
+ * op_rotl - rotates the stack to the top
+ * the top element of the stack becomes the bottom and the second top elemnet
+ * becomes the top element
+ * @stack: stack
+ * @lnum: line number
+ *
+ * Return: void
+ */
+void op_rotl(stack_t **stack, unsigned int lnum)
+{
+	stack_t *temp = *stack, *prev;
+
+	for (; temp->next; temp = temp->next)
+		;
+
+	if (temp->prev == *stack)
+	{
+		prev = *stack;
+		prev->prev = temp;
+		prev->next = NULL;
+		temp->prev = NULL;
+		temp->next = prev;
+		*stack = temp;
+	}
+	else
+	{
+		prev = temp->prev;
+		prev->next = NULL;
+
+		temp->next = (*stack)->next;
+		temp->prev = NULL;
+		(*stack)->prev = temp;
+		*stack = temp;
+	}
+
+	(void)lnum;
+}
+
+/**
+ * op_rotr - rotates the stack to the bottom
+ * the last element of the stack becomes the top element of the stack
+ * @stack: stack
+ * @lnum: line number
+ *
+ * Return: void
+ */
+void op_rotr(stack_t **stack, unsigned int lnum)
+{
+	stack_t *temp = *stack, *prev;
+
+	prev = temp;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+
+	for (temp = *stack; temp->next; temp = temp->next)
+		;
+
+	prev->prev = temp;
+	prev->next = NULL;
+	temp->next = prev;
+
+	(void)lnum;
+}
+
