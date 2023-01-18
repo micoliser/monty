@@ -143,14 +143,28 @@ void op_swap(stack_t **stack, unsigned int lnum)
 	if (!(*stack) || !(*stack)->next)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", lnum);
+		free_global();
 		exit(EXIT_FAILURE);
 	}
 
 	for (; temp->next->next; temp = temp->next)
 		;
-	temp2 = temp->next;
-	temp2->prev = temp->prev;
-	temp2->next = temp;
-	temp->next = NULL;
-	temp->prev = temp2;
+
+	s.number = _itoa(temp->n);
+	temp2 = temp;
+	if (temp == *stack)
+	{
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+	}
+	else
+	{
+		temp = temp->next;
+		temp2->prev->next = temp;
+		temp->prev = temp2->prev;
+	}
+
+	free(temp2);
+	op_push(stack, lnum);
+	free(s.number);
 }
