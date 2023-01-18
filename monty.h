@@ -70,7 +70,10 @@ void op_pint(stack_t **, unsigned int);
 void op_swap(stack_t **, unsigned int);
 void op_add(stack_t **, unsigned int);
 void op_sub(stack_t **, unsigned int);
-void op_nop(stack_t **, unsigned int);
+void op_mul(stack_t **, unsigned int);
+void op_div(stack_t **, unsigned int);
+void op_mod(stack_t **, unsigned int);
 void op_pop(stack_t **, unsigned int);
+void op_nop(stack_t **, unsigned int);
 
 #endif

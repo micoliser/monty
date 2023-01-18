@@ -12,9 +12,9 @@ global_t s;
 void (*get_op_func(char *opcode, unsigned int line))(stack_t **, unsigned int)
 {
 	instruction_t ops[] = {
-		{"push", op_push}, {"pall", op_pall},
-		{"pint", op_pint}, {"pop", op_pop},
-		{"swap", op_swap}, {"add", op_add},
+		{"push", op_push}, {"pall", op_pall}, {"mul", op_mul},
+		{"pint", op_pint}, {"pop", op_pop}, {"div", op_div},
+		{"swap", op_swap}, {"add", op_add}, {"mod", op_mod},
 		{"nop", op_nop}, {"sub", op_sub},
 		{NULL, NULL}
 	};

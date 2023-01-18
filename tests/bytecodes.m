@@ -1,21 +1,15 @@
 push 1
 push +020
 pall
- swap
+ add 
  pall
- swap
- pall
- swap
- pall
- swap
- pall
- swap
- pall
- push 3
+ pop
  push 5
- swap
- pall
- swap
- pall
- swap
- pall
+ push 2
+ push 1
+   pall
+   sub
+   push 0
+   pall
+   mod
+ 
