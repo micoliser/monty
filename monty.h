@@ -64,6 +64,7 @@ void read_file(char *, stack_t *);
 void free_stack(stack_t *);
 char *_itoa(int n);
 void free_global(void);
+void check_number(unsigned int);
 
 void op_pall(stack_t **, unsigned int);
 void op_push(stack_t **, unsigned int);

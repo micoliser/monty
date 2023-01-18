@@ -25,6 +25,29 @@ char *_itoa(int n)
 }
 
 /**
+ * check_number - checks if an array of chars is a number
+ * @lnum: line number
+ *
+ * Return: void
+ */
+void check_number(unsigned int lnum)
+{
+	int start = 0, i;
+
+	if (s.number[start] == '-' || s.number[start] == '+')
+		start++;
+	for (i = start; s.number[i]; i++)
+	{
+		if (s.number[i] < '0' || s.number[i] > '9')
+		{
+			free_global();
+			fprintf(stderr, "L%d: usage: push integer\n", lnum);
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+/**
  * free_stack - frees the stack
  * @head: head of stack
  *
