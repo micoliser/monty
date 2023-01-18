@@ -53,6 +53,7 @@ typedef struct global_s
 	FILE *file;
 	char *buf;
 	stack_t *stack;
+	int is_stack;
 } global_t;
 
 extern global_t s;
@@ -69,6 +70,8 @@ void op_push(stack_t **, unsigned int);
 void op_pint(stack_t **, unsigned int);
 void op_swap(stack_t **, unsigned int);
 void op_pchar(stack_t **, unsigned int);
+void op_stack(stack_t **, unsigned int);
+void op_queue(stack_t **, unsigned int);
 void op_pstr(stack_t **, unsigned int);
 void op_rotl(stack_t **, unsigned int);
 void op_rotr(stack_t **, unsigned int);
@@ -79,5 +82,7 @@ void op_div(stack_t **, unsigned int);
 void op_mod(stack_t **, unsigned int);
 void op_pop(stack_t **, unsigned int);
 void op_nop(stack_t **, unsigned int);
+
+void queue_push(stack_t **, int);
 
 #endif

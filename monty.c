@@ -17,7 +17,7 @@ void (*get_op_func(char *opcode, unsigned int line))(stack_t **, unsigned int)
 		{"swap", op_swap}, {"add", op_add}, {"mod", op_mod},
 		{"nop", op_nop}, {"sub", op_sub}, {"pchar", op_pchar},
 		{"pstr", op_pstr}, {"rotl", op_rotl}, {"rotr", op_rotr},
-		{NULL, NULL}
+		{"stack", op_stack}, {"queue", op_queue}, {NULL, NULL}
 	};
 	int i, cmp;
 
@@ -38,13 +38,15 @@ void (*get_op_func(char *opcode, unsigned int line))(stack_t **, unsigned int)
  * @st: stack
  * @num: number
  * @buff: buffer
+ * @stk: stack or queue
  *
  * Return: void
  */
-void set_global(FILE *filename, stack_t *st, char *num, char *buff)
+void set_global(FILE *filename, stack_t *st, char *num, char *buff, int stk)
 {
 	s.file = filename;
 	s.stack = st;
+	s.is_stack = stk;
 	s.number = num;
 	s.buf = buff;
 }
@@ -70,7 +72,7 @@ void read_file(char *path, stack_t *stack)
 		exit(EXIT_FAILURE);
 	}
 
-	set_global(file, stack, NULL, NULL);
+	set_global(file, stack, NULL, NULL, 1);
 
 	while (1)
 	{

@@ -30,24 +30,31 @@ void op_push(stack_t **stack, unsigned int lnum)
 		}
 	}
 	num = atoi(s.number);
-	new = malloc(sizeof(stack_t));
-	if (!new)
+	if (s.is_stack == 1)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	new->n = num;
-	new->prev = NULL;
-	new->next = NULL;
+		new = malloc(sizeof(stack_t));
+		if (!new)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
+		new->n = num;
+		new->prev = NULL;
+		new->next = NULL;
 
-	if (!(*stack))
-		*stack = new;
+		if (!(*stack))
+			*stack = new;
+		else
+		{
+			for (; temp->next; temp = temp->next)
+				;
+			new->prev = temp;
+			temp->next = new;
+		}
+	}
 	else
 	{
-		for (; temp->next; temp = temp->next)
-			;
-		new->prev = temp;
-		temp->next = new;
+		queue_push(stack, num);
 	}
 }
 

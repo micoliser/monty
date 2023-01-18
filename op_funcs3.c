@@ -12,6 +12,7 @@ void op_mod(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack;
 	char *num;
+	int prev_is_stack;
 
 	if (!(*stack) || !(*stack)->next)
 	{
@@ -35,7 +36,10 @@ void op_mod(stack_t **stack, unsigned int lnum)
 	op_pop(stack, lnum);
 
 	s.number = num;
+	prev_is_stack = s.is_stack;
+	s.is_stack = 1;
 	op_push(stack, lnum);
+	s.is_stack = prev_is_stack;
 
 	free(num);
 }
@@ -138,7 +142,7 @@ void op_rotl(stack_t **stack, unsigned int lnum)
 			prev = temp->prev;
 			prev->next = NULL;
 
-			temp->next = (*stack)->next;
+			temp->next = *stack;
 			temp->prev = NULL;
 			(*stack)->prev = temp;
 			*stack = temp;

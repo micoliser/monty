@@ -11,6 +11,7 @@ void op_add(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack;
 	char *num;
+	int prev_is_stack;
 
 	if (!(*stack) || !(*stack)->next)
 	{
@@ -27,7 +28,10 @@ void op_add(stack_t **stack, unsigned int lnum)
 	op_pop(stack, lnum);
 
 	s.number = num;
+	prev_is_stack = s.is_stack;
+	s.is_stack = 1;
 	op_push(stack, lnum);
+	s.is_stack = prev_is_stack;
 
 	free(num);
 }
@@ -61,6 +65,7 @@ void op_sub(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack;
 	char *num;
+	int prev_is_stack;
 
 	if (!(*stack) || !(*stack)->next)
 	{
@@ -77,7 +82,10 @@ void op_sub(stack_t **stack, unsigned int lnum)
 	op_pop(stack, lnum);
 
 	s.number = num;
+	prev_is_stack = s.is_stack;
+	s.is_stack = 1;
 	op_push(stack, lnum);
+	s.is_stack = prev_is_stack;
 
 	free(num);
 }
@@ -94,6 +102,7 @@ void op_div(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack;
 	char *num;
+	int prev_is_stack;
 
 	if (!(*stack) || !(*stack)->next)
 	{
@@ -109,7 +118,7 @@ void op_div(stack_t **stack, unsigned int lnum)
 		free_global();
 		fprintf(stderr, "L%d: division by zero\n", lnum);
 		exit(EXIT_FAILURE);
-	}	
+	}
 
 	num = _itoa(temp->n / temp->next->n);
 
@@ -117,7 +126,10 @@ void op_div(stack_t **stack, unsigned int lnum)
 	op_pop(stack, lnum);
 
 	s.number = num;
+	prev_is_stack = s.is_stack;
+	s.is_stack = 1;
 	op_push(stack, lnum);
+	s.is_stack = prev_is_stack;
 
 	free(num);
 }
@@ -134,6 +146,7 @@ void op_mul(stack_t **stack, unsigned int lnum)
 {
 	stack_t *temp = *stack;
 	char *num;
+	int prev_is_stack;
 
 	if (!(*stack) || !(*stack)->next)
 	{
@@ -150,7 +163,10 @@ void op_mul(stack_t **stack, unsigned int lnum)
 	op_pop(stack, lnum);
 
 	s.number = num;
+	prev_is_stack = s.is_stack;
+	s.is_stack = 1;
 	op_push(stack, lnum);
+	s.is_stack = prev_is_stack;
 
 	free(num);
 }
