@@ -60,7 +60,7 @@ extern global_t s;
 
 void (*get_op_func(char *, unsigned int))(stack_t **stack, unsigned int);
 
-void read_file(char *, stack_t *);
+void read_file(char *);
 void free_stack(stack_t *);
 char *_itoa(int n);
 void free_global(void);

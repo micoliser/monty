@@ -54,11 +54,10 @@ void set_global(FILE *filename, stack_t *st, char *num, char *buff, int stk)
 /**
  * read_file - reads the file and carry out commands
  * @path: file path to read
- * @stack: the stack
  *
  * Return: void
  */
-void read_file(char *path, stack_t *stack)
+void read_file(char *path)
 {
 	FILE *file;
 	char *r, *command, *value;
@@ -72,7 +71,7 @@ void read_file(char *path, stack_t *stack)
 		exit(EXIT_FAILURE);
 	}
 
-	set_global(file, stack, NULL, NULL, 1);
+	set_global(file, NULL, NULL, NULL, 1);
 
 	while (1)
 	{
@@ -110,15 +109,13 @@ void read_file(char *path, stack_t *stack)
  */
 int main(int argc, char **argv)
 {
-	stack_t *stack = NULL;
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	read_file(argv[1], stack);
+	read_file(argv[1]);
 
 	return (0);
 }
