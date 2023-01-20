@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define SIZE 50
+#define SIZE 1024
 
 #include <stdio.h>
 #include <unistd.h>

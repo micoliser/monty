@@ -87,8 +87,8 @@ void read_file(char *path)
 		if (!r)
 			break;
 
-		command = strtok(s.buf, " \t\n");
-		value = strtok(NULL, " \t\n");
+		command = strtok(s.buf, " \t\n\r");
+		value = strtok(NULL, " \t\n\r");
 		if (command && command[0] != '#')
 		{
 			op_func = get_op_func(command, line);
